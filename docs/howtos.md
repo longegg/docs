@@ -61,13 +61,58 @@ Kjør denne filen:
 sudo sh ./VBoxLinuxAdditions.run
 ```
 
-### SSH 
+### Nettverk 
 
-#### Host -> Guest
+#### Bridged
+
+NB!: Problemer med denne hjemme (GET-boks DHCP klarer ikke tildele IP). Bruk metoden under.
 
 I Virtualbox:
-Høyreklikk på VM > Settings > Network > Enable Network Adapter
+Høyreklikk på VM > Settings > Network > Enable Network Adapter > Attached To: Bridged Network adapter
 Bruke WIFI enheten
+
+#### NAT / Host Only
+
+I VirtualBox. File > Host Network Manager > Opprett ny
+
+- Configure Adapter Manually
+- IPv4 Address: 192.168.2.1
+- IPv4 Network Mask: 255.255.255.0
+- Apply
+
+Settings på VM. Network
+
+Adapter 1: 
+- Attached to: NAT
+
+Adapter 2: 
+- Attached to: Host-only Adapter
+- Name: Velg den nye adapteren
+
+I Lubuntu:
+
+Åpne terminal:
+
+```
+ifconfig
+```
+
+Du skal se to adaptere. Den en kan ikke nås, den andre må få en Ipv4 adresse.
+
+Åpne Network Connections (høyreklikk nettverksikon nede i høyre hjørne).
+
+Velg riktig .. og Ipv4 Settings.
+Legg til ny: 
+- Address: 192.168.2.10
+- Gateway: 192.168.2.1
+- DNS Server: 8.8.8.8 (Google sin. Ikke nødvendig?)
+
+Kjør ifconfig igjen. Må kanskje disconnect og connect nettverk.
+
+Prøv å pinge fra Host og vice versa.
+
+
+#### Open-SSH-Server
 
 Inne i VM:
 
