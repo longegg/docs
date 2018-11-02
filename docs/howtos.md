@@ -3,26 +3,37 @@
 ### Installer Virtualbox
 
 Last ned Virtualbox og installer.
+<https://www.virtualbox.org/>
 
 ### Last ned Linux ISO
 
 Hvis Lubuntu, last ned her:
 <https://lubuntu.net/downloads/>
 
+Det kan være lurt å velge LTS-versjon for å sikre oppdaterte pakker gjennom PPA.
+
 ### Lag ny maskin i Virtualbox
 
 - Gi maskinen et navn, velg operativsystem og versjon.
 - 4096 MB RAM
-- 20 GB Virtual Hard Drive (Fixed er raskere)
+- 20 GB Virtual Hard Drive. Fixed er raskere, men kanskje ikke nødvendig?
+
+### Juster instillinger
+
+- Øk RAM til skjermkort
+- Øktil 2 kjerner prosessor
+- Skru av Lyd hvis ikke trenger
+- Skru på clipboard funksjonalitet
 
 ### Last inn ISO
 
 - Settings > Storage > Trykk på ikon av CD
 - Finn nedlastet ISO og trykk på OK
 
-### Installer OS
+### Installer OS / Oppdater
 
 Start maskinen. Følg instruksjoner for installering av OS.
+Installer eventuelle oppdatering som dukker opp i OS.
 
 ### Build-essential
 
@@ -50,7 +61,9 @@ Kjør denne filen:
 sudo sh ./VBoxLinuxAdditions.run
 ```
 
-### SSH tilgang
+### SSH 
+
+#### Host -> Guest
 
 I Virtualbox:
 Høyreklikk på VM > Settings > Network > Enable Network Adapter
@@ -70,6 +83,8 @@ ifconfig
 
 Bruk IP-addresse i windows for å koble til.
 
+#### Guest -> Eksterne
+
 Lag .ssh mappen under Home directory hvis den ikke finnes:
 
 ```
@@ -81,6 +96,8 @@ Bruk SSH for å kopere over filer, typ:
 ```
 scp config devbox:.ssh/
 ```
+
+Fjern settinger i config-fil som ikke trenger å være der.
 
 Sett riktig permissions i VM:
 
@@ -95,8 +112,25 @@ Så bruk ssh-add for å legge til identity
 ssh-add
 ```
 
-## Emacs Lubuntu
+## Emacs
 
+### Lubuntu Bionic
+
+```
 sudo add-apt-repository ppa:kelleyk/emacs
 sudo apt-get update
 sudo apt install emacs26
+```
+
+### Lubuntu Cosmic (Nov. 2018)
+
+Brukte disse som guide:
+<https://www.gnu.org/software/emacs/manual/html_node/efaq/Installing-Emacs.html>
+<http://ubuntuhandbook.org/index.php/2014/10/emacs-24-4-released-install-in-ubuntu-14-04/>
+
+Hvis denne feilen dukker opp:
+You must put some ‘source’ URIs in your sources.list
+
+<https://techoverflow.net/2018/05/03/how-to-fix-apt-get-source-you-must-put-some-source-uris-in-your-sources-list/>
+
+Men ikke ta med deb-scr som har med Canonical å gjøre!

@@ -1,4 +1,4 @@
 site_name: Docs
 nav:
   - 'Hjem': 'index.md'
-  - 'HOWTOS': 'howtos.md'
+  - 'HOWTOS Linux': 'howtos.md'
